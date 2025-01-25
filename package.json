@@ -17,7 +17,25 @@
         "command": "local-ogp-checker.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "views": {
+      "local-ogp-checker-view": [
+        {
+          "type": "webview",
+          "id": "local-ogp-checker.view",
+          "name": "Local OGP Checker 1"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "local-ogp-checker-view",
+          "title": "Local OGP Checker",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
