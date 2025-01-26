@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 
-export class LocalOgpCheckerViewProvider implements vscode.WebviewViewProvider {
+export class LocalOgpCheckerSideBarViewProvider implements vscode.WebviewViewProvider {
+    private static readonly REQUEST_CHECK_OGP_SIGNAL = 'requestCheckOgpSignal';
+
     private _view?: vscode.WebviewView;
 
     constructor(private readonly _extensionUri: vscode.Uri) { }
@@ -18,13 +20,17 @@ export class LocalOgpCheckerViewProvider implements vscode.WebviewViewProvider {
         webviewView.webview.html = this.buildWebviewContent();
 
         webviewView.webview.onDidReceiveMessage(async (message) => {
-            if (message.command === 'requestOgpCheckSignal') {
+            if (message.command === LocalOgpCheckerSideBarViewProvider.REQUEST_CHECK_OGP_SIGNAL) {
                 const siteUrl = message.siteUrl;
-                vscode.window.showInformationMessage(`OGP Check: ${siteUrl}`);
+                vscode.window.showInformationMessage(`Check OGP URL: ${siteUrl}`);
 
-                const response = await fetch(siteUrl);
-                vscode.window.showInformationMessage(`Response: ${response.status}`);
-                vscode.window.showInformationMessage(`Data: ${await response.text()}`);
+                try {
+                    const response = await fetch(siteUrl);
+                    vscode.window.showInformationMessage(`Response: ${response.status}`);
+                    vscode.window.showInformationMessage(`Data: ${await response.text()}`);
+                } catch (error) {
+                    vscode.window.showErrorMessage(`Error: ${error}`);
+                }
             }
         })
     }
@@ -42,7 +48,7 @@ export class LocalOgpCheckerViewProvider implements vscode.WebviewViewProvider {
                 document.getElementById('button').addEventListener('click', () => {
                     const siteUrl = document.getElementById('siteUrl').value;
                     vscode.postMessage({
-                        command: 'requestOgpCheckSignal',
+                        command: "${LocalOgpCheckerSideBarViewProvider.REQUEST_CHECK_OGP_SIGNAL}",
                         siteUrl: siteUrl
                     });
                 });

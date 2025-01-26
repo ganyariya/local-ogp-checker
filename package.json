@@ -19,18 +19,18 @@
       }
     ],
     "views": {
-      "local-ogp-checker-view": [
+      "local-ogp-checker-sidebar-view": [
         {
           "type": "webview",
-          "id": "local-ogp-checker.view",
-          "name": "Local OGP Checker 1"
+          "id": "local-ogp-checker.sidebar.view",
+          "name": "Local OGP Checker"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "local-ogp-checker-view",
+          "id": "local-ogp-checker-sidebar-view",
           "title": "Local OGP Checker",
           "icon": "resources/icon.svg"
         }
