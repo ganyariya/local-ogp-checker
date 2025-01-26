@@ -11,7 +11,6 @@ export function activate(context: vscode.ExtensionContext) {
 	const sideBarViewProvider = new LocalOgpCheckerSideBarViewProvider(context.extensionUri);
 	const sideBarProviderDisposable = vscode.window.registerWebviewViewProvider('local-ogp-checker.sidebar.view', sideBarViewProvider);
 
-
 	context.subscriptions.push(commandDisposable);
 	context.subscriptions.push(sideBarProviderDisposable);
 }
