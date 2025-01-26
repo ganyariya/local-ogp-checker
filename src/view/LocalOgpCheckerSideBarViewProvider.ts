@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export class LocalOgpCheckerViewProvider implements vscode.WebviewViewProvider {
+export class LocalOgpCheckerSideBarViewProvider implements vscode.WebviewViewProvider {
     private _view?: vscode.WebviewView;
 
     constructor(private readonly _extensionUri: vscode.Uri) { }
